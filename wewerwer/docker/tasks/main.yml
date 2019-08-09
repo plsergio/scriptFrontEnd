@@ -1,0 +1,40 @@
+---
+- name: Checa se o Docker já foi instalado
+  stat:
+    path: /snap/docker/
+  register: temDocker  
+
+- name: Bloco de instalação do Docker-ce
+  block:
+  - name: Remover o Docker.io
+    package:
+      name: "{{ packages }}"
+      state: absent
+    vars:
+      packages:
+      - docker
+      - docker-engine
+      - docker.io
+      - containerd
+      - runc
+  - name: Instala Snapd
+    apt:
+      name: snapd
+      update_cache: yes
+  - name: Instala Docker-ce
+    shell: "snap install docker"
+  - name: Cria o grupo docker
+    shell: "groupadd docker"
+    ignore_errors: yes
+  - name: Adiciona o seu usuário ao grupo docker
+    shell: "usermod -aG docker $USER"
+  when: temDocker.stat.exists == False
+  become: yes
+
+- name: Export Path
+  shell: "{{ item }}"
+  with_items:
+    - echo 'export PATH=$PATH:/snap/bin' >> ~/.bashrc
+    - echo 'export PATH=$PATH:/snap/bin' >> ~/.profile
+
+    

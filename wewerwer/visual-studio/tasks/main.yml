@@ -1,0 +1,26 @@
+---
+- name: Instala o Visual Studio
+  apt:
+    deb: https://go.microsoft.com/fwlink/?LinkID=760868
+  become: yes
+
+- name: Verifica Desktop
+  stat:
+    path: ~/Desktop
+  register: ehDesktop
+
+- name: Copia Atalho para Desktop
+  copy:
+    src: /usr/share/applications/code.desktop
+    dest: ~/Desktop/
+    mode: 0777
+  when: ehDesktop.stat.exists == True
+
+- name: Copia Atalho para Área de Trabalho
+  copy:
+    src: /usr/share/applications/code.desktop
+    dest: ~/Área de Trabalho
+    mode: 0777
+  when: ehDesktop.stat.exists == False
+
+
