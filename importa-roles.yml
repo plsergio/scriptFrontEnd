@@ -1,0 +1,13 @@
+---
+- name: Importando Roles
+  hosts: localhost
+  tasks:        
+    - name: 'Git clone da role Visual Studio'
+      git:
+        repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode}}@gitlab.tjdft.jus.br/configuracao/ansible/roles/visual-studio.git
+        dest: roles/visual-studio
+
+    - name: 'Git clone da role Docker'
+      git:
+        repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode}}@gitlab.tjdft.jus.br/configuracao/ansible/roles/docker.git
+        dest: roles/docker

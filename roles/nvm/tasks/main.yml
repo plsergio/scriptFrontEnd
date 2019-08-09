@@ -1,0 +1,17 @@
+---
+- name: 'Git clone do NVM v0.34.0'
+  git:
+    repo: https://github.com/nvm-sh/nvm.git
+    dest: ~/.nvm
+    version: v0.34.0
+
+
+- name: Exporta NVM_DIR
+  shell: "{{ item }}"
+  with_items:
+    - echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.bashrc
+    - echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.bashrc
+    - echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.bashrc
+    - echo 'export NVM_DIR="$HOME/.nvm"' >> ~/.profile
+    - echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.profile
+    - echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> ~/.profile

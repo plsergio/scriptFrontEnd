@@ -1,0 +1,30 @@
+---
+- import_playbook: importa-roles.yml
+
+- name: Instala Nodejs 8x, Docker-CE, Visual Studio, NPM, NVM, YARN.
+  hosts: localhost
+  tasks:            
+    - name: Instala Npm
+      apt:
+        name: 
+        - npm
+        state: latest
+      become: yes
+
+    - include_role:
+        name: nvm
+
+    - name: Install node 8 LTS
+      shell: "source  ~/.nvm/nvm.sh && nvm install 8 --lts" 
+      args:
+        executable: /bin/bash
+        
+    - name: Instala YARN
+      shell: "npm install -g yarn" 
+      become: yes
+
+    - include_role:
+        name: docker
+
+    - include_role:
+        name: visual-studio  
