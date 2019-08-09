@@ -14,8 +14,8 @@
     - include_role:
         name: nvm
 
-    - name: Install node 8 LTS
-      shell: "source  ~/.nvm/nvm.sh && nvm install 8 --lts" 
+    - name: Install node LTS
+      shell: "source  ~/.nvm/nvm.sh && nvm install --lts" 
       args:
         executable: /bin/bash
         
