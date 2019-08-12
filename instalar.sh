@@ -27,7 +27,7 @@ limparInstalacao(){
   5 50
  sudo apt autoclean -y
  sudo apt autoremove -y 
-# sudo rm -Rf $caminhoInstalacao
+ sudo rm -Rf $caminhoInstalacao
 }
 
 instalarProgramasMinimos
