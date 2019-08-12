@@ -1,5 +1,4 @@
 ---
-- import_playbook: importa-roles.yml
 
 - name: Instala Nodejs 8x, Docker-CE, Visual Studio, NPM, NVM, YARN.
   hosts: localhost
